@@ -4,11 +4,13 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.redis.core.script.DefaultRedisScript;
 
+import java.util.List;
+
 @Configuration
 public class RedisConfig {
     @Bean
-    public DefaultRedisScript<Long> rateLimiterScript() {
-        DefaultRedisScript<Long> script = new DefaultRedisScript<>();
+    public DefaultRedisScript<List> rateLimiterScript() {
+        DefaultRedisScript<List> script = new DefaultRedisScript<>();
         script.setScriptText(
                 "local windowSize = tonumber(ARGV[1]) " +
                 "local limit = tonumber(ARGV[2]) " +
@@ -32,7 +34,7 @@ public class RedisConfig {
                 "  return {1, current, ttl} " +
                 "end"
         );
-        script.setResultType(Long.class);
+        script.setResultType(List.class);
         return script;
     }
 }
