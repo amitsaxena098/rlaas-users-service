@@ -1,5 +1,6 @@
 package com.amitsaxena098.rlaas_users_service.service;
 
+import com.amitsaxena098.rlaas_users_service.interfaces.RateLimitingAlgorithm;
 import com.amitsaxena098.rlaas_users_service.model.RateLimitResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.redis.core.StringRedisTemplate;
@@ -11,13 +12,14 @@ import java.util.List;
 
 @Service
 @RequiredArgsConstructor
-public class FixedWindowSizeRateLimiting {
+public class FixedWindowSizeRateLimiting implements RateLimitingAlgorithm {
     private static final int WINDOW_SIZE = 60;
     private static final int MAX_REQUESTS = 5;
 
     private final StringRedisTemplate stringRedisTemplate;
     private final RedisScript<List> script;
 
+    @Override
     public RateLimitResponse allowRequest(String userId) {
         String keyPrefix = "rlaas:rate_limit:" + userId;
 
@@ -34,7 +36,7 @@ public class FixedWindowSizeRateLimiting {
         long currentCount = (Long)result.get(1);
         long ttl = (Long) result.get(2);
 
-        return new RateLimitResponse(allowed, currentCount, ttl, "User is allowed");
+        return new RateLimitResponse(allowed, currentCount, ttl);
     }
 
 
