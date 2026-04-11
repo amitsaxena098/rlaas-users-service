@@ -5,19 +5,17 @@ import com.amitsaxena098.rlaas_users_service.model.RateLimitResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.data.redis.core.script.RedisScript;
-import org.springframework.stereotype.Service;
 
 import java.util.Collections;
 import java.util.List;
 
-@Service
 @RequiredArgsConstructor
 public class FixedWindowSizeRateLimiting implements RateLimitingAlgorithm {
-    private static final int WINDOW_SIZE = 60;
-    private static final int MAX_REQUESTS = 5;
 
     private final StringRedisTemplate stringRedisTemplate;
     private final RedisScript<List> script;
+    private final int windowSize;
+    private final int maxRequests;
 
     @Override
     public RateLimitResponse allowRequest(String userId) {
@@ -25,8 +23,8 @@ public class FixedWindowSizeRateLimiting implements RateLimitingAlgorithm {
 
         List result =  stringRedisTemplate.execute(
                 script, Collections.singletonList(keyPrefix),
-                String.valueOf(WINDOW_SIZE),
-                String.valueOf(MAX_REQUESTS)
+                String.valueOf(windowSize),
+                String.valueOf(maxRequests)
         ).stream().toList();
         if (result.size() < 3) {
             throw new RuntimeException("Invalid Redis response");
