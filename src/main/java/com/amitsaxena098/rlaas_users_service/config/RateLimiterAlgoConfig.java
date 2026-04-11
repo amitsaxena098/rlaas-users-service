@@ -15,9 +15,9 @@ import java.util.List;
 public class RateLimiterAlgoConfig {
 
     @Value("${rate-limiter.window-size}")
-    private static int WINDOW_SIZE ;
+    private int WINDOW_SIZE ;
     @Value("${rate-limiter.max-requests}")
-    private static int MAX_REQUESTS;
+    private int MAX_REQUESTS;
 
     @Bean
     @ConditionalOnProperty(name = "rate-limiter.use-algo", havingValue = "fixed-window-algo")
