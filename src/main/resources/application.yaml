@@ -1,0 +1,4 @@
+rate-limiter:
+  use-algo: fixed-window-algo
+  max-requests: 5
+  window-size: 60
