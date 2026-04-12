@@ -10,7 +10,7 @@ import java.util.Collections;
 import java.util.List;
 
 @RequiredArgsConstructor
-public class FixedWindowSizeRateLimiting implements RateLimitingAlgorithm {
+public class FixedWindowAlgoService implements RateLimitingAlgorithm {
 
     private final StringRedisTemplate stringRedisTemplate;
     private final RedisScript<List> script;
