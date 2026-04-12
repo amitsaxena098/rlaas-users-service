@@ -1,7 +1,8 @@
 package com.amitsaxena098.rlaas_users_service.config;
 
 import com.amitsaxena098.rlaas_users_service.interfaces.RateLimitingAlgorithm;
-import com.amitsaxena098.rlaas_users_service.service.FixedWindowSizeRateLimiting;
+import com.amitsaxena098.rlaas_users_service.service.FixedWindowAlgoService;
+import com.amitsaxena098.rlaas_users_service.service.SlidingWindowAlgoService;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
@@ -24,6 +25,13 @@ public class RateLimiterAlgoConfig {
     @ConditionalOnProperty(name = "rate-limiter.use-algo", havingValue = "fixed-window-algo")
     public RateLimitingAlgorithm fixedWindowAlgo(StringRedisTemplate redisTemplate,
                                                  @Qualifier("fixedWindowScript") RedisScript<List> rateLimitScript) {
-        return new FixedWindowSizeRateLimiting(redisTemplate, rateLimitScript, WINDOW_SIZE, MAX_REQUESTS);
+        return new FixedWindowAlgoService(redisTemplate, rateLimitScript, WINDOW_SIZE, MAX_REQUESTS);
+    }
+
+    @Bean
+    @ConditionalOnProperty(name = "rate-limiter.use-algo", havingValue = "sliding-window-algo")
+    public RateLimitingAlgorithm slidingWindow(StringRedisTemplate redisTemplate,
+                                               @Qualifier("slidingWindowScript") RedisScript<List> rateLimitScript) {
+        return new SlidingWindowAlgoService(redisTemplate, rateLimitScript, WINDOW_SIZE, MAX_REQUESTS);
     }
 }
