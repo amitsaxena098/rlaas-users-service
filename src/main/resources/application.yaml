@@ -3,3 +3,22 @@ rate-limiter:
   use-algo: sliding-window-algo
   max-requests: 5
   window-size: 60
+
+management:
+  otlp:
+    metrics:
+      export:
+        url: ${OTEL_EXPORTER_OTLP_METRICS}
+        headers:
+          Authorization: ${OTEL_AUTHORIZATION}
+        step: 30s
+  endpoints:
+    web:
+      exposure:
+        include: health, info, prometheus, metrics
+  endpoint:
+    prometheus:
+      enabled: true
+  metrics:
+    tags:
+      application: ${spring.application.name}   # adds app label to every metric
