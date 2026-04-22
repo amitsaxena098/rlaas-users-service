@@ -68,7 +68,6 @@ Key behaviors:
 <img width="1484" height="394" alt="image" src="https://github.com/user-attachments/assets/7cbe3063-8369-4ab2-aa30-18617d6253eb" />
 
 ## Metrics
-[View Metrics on Grafana cloud](https://amitsaxena098.grafana.net/explore?schemaVersion=1&panes=%7B%227fm%22:%7B%22datasource%22:%22grafanacloud-prom%22,%22queries%22:%5B%7B%22refId%22:%22A%22,%22expr%22:%22%7Bapplication%3D%5C%22rlaas-users-service%5C%22%7D%22,%22range%22:true,%22instant%22:true,%22datasource%22:%7B%22type%22:%22prometheus%22,%22uid%22:%22grafanacloud-prom%22%7D,%22editorMode%22:%22builder%22,%22legendFormat%22:%22__auto%22%7D%5D,%22range%22:%7B%22from%22:%22now-30m%22,%22to%22:%22now%22%7D,%22compact%22:false%7D%7D&orgId=1)
 <img width="1512" height="782" alt="image" src="https://github.com/user-attachments/assets/0b57b4e7-d425-4dee-b428-5bfd7dcb1b94" />
 
 ## Redis Metrics
