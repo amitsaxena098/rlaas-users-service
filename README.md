@@ -61,5 +61,10 @@ Key behaviors:
   </Card>
 </CardGroup>
 
+## Load Testing Report
 
-Built with [Mintlify](https://mintlify.com).
+[View Locust Report](https://amitsaxena098.github.io/rlaas-users-service/Locust_2026-04-23-00h25_locustfile.py_https___rlaas-users-service-production.up.railway.app.html)
+<img width="1533" height="442" alt="image" src="https://github.com/user-attachments/assets/b7d3360b-5cb4-443f-b2d0-919d9b9cd16a" />
+<img width="1484" height="394" alt="image" src="https://github.com/user-attachments/assets/7cbe3063-8369-4ab2-aa30-18617d6253eb" />
+
+
